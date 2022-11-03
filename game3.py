@@ -2,6 +2,12 @@
 Gra:
     Arkanoid[https://pl.wikipedia.org/wiki/Arkanoid]
 
+Zasady gry:
+    Celem gry jest przesuwanie paletką po linii poziomej w taki sposób, aby odbijająca piłka
+    uderzyła w kolorowe prostokąty. Gdy wszystkie prostokąty znikną z planszy, gracz wygrywa grę.
+    Przegrać można jedynie, gdy piłka znajdzie się na wysokości uniemożliwiającej
+    odbicie się od paletki.
+
 Autorzy:
     Damian Kijańczuk s20154
     Szymon Ciemny    s21355
@@ -185,10 +191,10 @@ class FuzzyPaddleExpert():
         self.paddleMove['right'] = fuzz.trapmf(self.paddleMove.universe, [0,0, 10, 10]  )
 
         rules = [
-            ctrl.Rule(self.paddle_Xdiff['leftSide']  & self.ball_X["middle"], self.paddleMove['right']),
+            ctrl.Rule(self.paddle_Xdiff['leftSide' ] & self.ball_X["middle"], self.paddleMove['right']),
             ctrl.Rule(self.paddle_Xdiff['rightSide'] & self.ball_X["middle"], self.paddleMove['left'] ),
-            ctrl.Rule(self.ball_X["leftSide"]        & self.ball_Y["high"]  , self.paddleMove['right']),
-            ctrl.Rule(self.ball_X["rightSide"]       & self.ball_Y["high"]  , self.paddleMove['left'] ),
+            ctrl.Rule(self.ball_X[      "leftSide" ] & self.ball_Y["high"  ], self.paddleMove['right']),
+            ctrl.Rule(self.ball_X[      "rightSide"] & self.ball_Y["high"  ], self.paddleMove['left'] ),
         ]
 
         self.paddleControl = ctrl.ControlSystemSimulation(ctrl.ControlSystem(rules))
